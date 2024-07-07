@@ -46,7 +46,8 @@ class Habit(models.Model):
     activity = models.CharField(max_length=300, verbose_name='описание привычки')
     time = models.TimeField(verbose_name='время, в которое выполняется', null=True, blank=True)
     place = models.CharField(max_length=150, verbose_name='место', null=True, blank=True)
-    duration = models.DurationField(verbose_name='Продолжительность действия в сек.', default=None)
+    duration = models.DurationField(verbose_name='Продолжительность действия в сек.', default=None, null=True,
+                                    blank=True)
     periodicity = models.CharField(max_length=50, choices=PERIODICITY_CHOICES, verbose_name='периодичность',
                                    default=DAILY)
 
