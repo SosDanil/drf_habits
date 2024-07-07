@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 
 from habits.models import Reward, Habit
-from habits.serializers import RewardSerializer, HabitSerializer
+from habits.serializers import RewardSerializer, HabitSerializer, CreateUpdateHabitSerializer
 
 
 class RewardViewSet(viewsets.ModelViewSet):
@@ -13,7 +13,7 @@ class RewardViewSet(viewsets.ModelViewSet):
 
 
 class HabitCreateAPIView(CreateAPIView):
-    serializer_class = HabitSerializer
+    serializer_class = CreateUpdateHabitSerializer
     queryset = Habit.objects.all()
 
 
@@ -28,7 +28,7 @@ class HabitRetrieveAPIView(RetrieveAPIView):
 
 
 class HabitUpdateAPIView(UpdateAPIView):
-    serializer_class = HabitSerializer
+    serializer_class = CreateUpdateHabitSerializer
     queryset = Habit.objects.all()
 
 
