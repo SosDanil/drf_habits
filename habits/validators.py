@@ -24,5 +24,18 @@ class NotMore120Duration:
     def __call__(self, value):
         tmp_val = dict(value).get(self.field)
         delta = timedelta(seconds=120)
-        if tmp_val > delta:
-            raise ValidationError('Продолжительность привычки не может быть больше 120 секунд')
+        if tmp_val is not None:
+            if tmp_val > delta:
+                raise ValidationError('Продолжительность привычки не может быть больше 120 секунд')
+
+
+class OnlyPleasantHabit:
+
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, value):
+        tmp_val = dict(value).get(self.field)
+        if tmp_val is not None:
+            if tmp_val.is_pleasant == False:
+                raise ValidationError('В связанные привычки можно указывать только приятные привычки')
