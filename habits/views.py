@@ -18,10 +18,18 @@ class HabitCreateAPIView(CreateAPIView):
     queryset = Habit.objects.all()
 
 
-class HabitListAPIView(ListAPIView):
+class HabitPublicListAPIView(ListAPIView):
     serializer_class = HabitSerializer
-    queryset = Habit.objects.all()
+    queryset = Habit.objects.filter(is_public=True)
+
+
+class HabitOwnerListAPIView(ListAPIView):
+    serializer_class = HabitSerializer
     pagination_class = HabitPaginator
+
+    def get_queryset(self):
+        queryset = Habit.objects.filter(owner=self.request.user)
+        return queryset
 
 
 class HabitRetrieveAPIView(RetrieveAPIView):
