@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
 from habits.models import Reward, Habit
-from habits.validators import OnlyRewardOrPleasantHabit, NotMore120Duration, OnlyPleasantHabit
+from habits.validators import OnlyRewardOrPleasantHabitValidator, DurationValidator, OnlyPleasantHabitValidator, \
+    PleasantDoesNotHaveRewardOrHabitValidator
 
 
 class RewardSerializer(serializers.ModelSerializer):
@@ -24,7 +25,8 @@ class CreateUpdateHabitSerializer(serializers.ModelSerializer):
         model = Habit
         fields = '__all__'
         validators = [
-            OnlyRewardOrPleasantHabit(field1='reward', field2='related_habit'),
-            NotMore120Duration(field='duration'),
-            OnlyPleasantHabit(field='related_habit')
+            OnlyRewardOrPleasantHabitValidator(field1='reward', field2='related_habit'),
+            DurationValidator(field='duration'),
+            OnlyPleasantHabitValidator(field='related_habit'),
+            PleasantDoesNotHaveRewardOrHabitValidator(field1='is_pleasant', field2='related_habit', field3='reward')
         ]
