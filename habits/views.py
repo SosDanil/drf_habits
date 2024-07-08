@@ -5,6 +5,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView,
 from habits.models import Reward, Habit
 from habits.paginations import HabitPaginator
 from habits.serializers import RewardSerializer, HabitSerializer, CreateUpdateHabitSerializer
+from users.permissions import IsOwner
 
 
 class RewardViewSet(viewsets.ModelViewSet):
@@ -35,12 +36,15 @@ class HabitOwnerListAPIView(ListAPIView):
 class HabitRetrieveAPIView(RetrieveAPIView):
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
+    permission_classes = [IsOwner,]
 
 
 class HabitUpdateAPIView(UpdateAPIView):
     serializer_class = CreateUpdateHabitSerializer
     queryset = Habit.objects.all()
+    permission_classes = [IsOwner, ]
 
 
 class HabitDestroyAPIView(DestroyAPIView):
     queryset = Habit.objects.all()
+    permission_classes = [IsOwner, ]
