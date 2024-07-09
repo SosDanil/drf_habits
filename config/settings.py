@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'drf_yasg',
+    'django_celery_beat',
 
     'users',
     'habits',
@@ -172,3 +173,10 @@ CELERY_TIMEZONE = "Asia/Almaty"
 
 TELEGRAM_URL = 'https://api.telegram.org/bot'
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+
+CELERY_BEAT_SCHEDULE = {
+    'send_to_telegram': {
+        'task': 'habits.tasks.remind_about_habit',
+        'schedule': timedelta(minutes=1),
+    },
+}
