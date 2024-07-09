@@ -9,7 +9,6 @@ from django.utils import timezone
 
 @shared_task
 def remind_about_habit():
-    print('working task')
     periodicity = ["Раз в день", "Раз в два дня", "Раз в три дня", "Раз в четыре дня", "Раз в пять дней",
                    "Раз в шесть дней", "Раз в неделю"]
     now = timezone.now()
