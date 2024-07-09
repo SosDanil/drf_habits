@@ -34,7 +34,7 @@ class Habit(models.Model):
     )
 
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='владелец',
-                              related_name='habit')
+                              related_name='habit', null=True, blank=True)
     related_habit = models.ForeignKey('self', on_delete=models.SET_NULL, verbose_name='связанная привычка',
                                       related_name='habit', null=True, blank=True)
     reward = models.ForeignKey(Reward, on_delete=models.SET_NULL, verbose_name='вознаграждение', related_name='habit',

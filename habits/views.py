@@ -9,7 +9,6 @@ from users.permissions import IsOwner
 
 
 class RewardViewSet(viewsets.ModelViewSet):
-    """Viewset for cars"""
     serializer_class = RewardSerializer
     queryset = Reward.objects.all()
 
@@ -17,6 +16,11 @@ class RewardViewSet(viewsets.ModelViewSet):
 class HabitCreateAPIView(CreateAPIView):
     serializer_class = CreateUpdateHabitSerializer
     queryset = Habit.objects.all()
+
+    def perform_create(self, serializer):
+        habit = serializer.save()
+        habit.owner = self.request.user
+        habit.save()
 
 
 class HabitPublicListAPIView(ListAPIView):
