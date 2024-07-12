@@ -41,7 +41,7 @@ class OnlyPleasantHabitValidator:
     def __call__(self, value):
         tmp_val = dict(value).get(self.field)
         if tmp_val is not None:
-            if tmp_val.is_pleasant == False:
+            if tmp_val.is_pleasant is False:
                 raise ValidationError('В связанные привычки можно указывать только приятные привычки')
 
 
